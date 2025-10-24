@@ -189,8 +189,8 @@ const app = express();
 app.use(wizbeat.middleware());
 
 // Add web dashboard
-app.get('/dashboard', wizbeat.dashboardRoute());
-app.get('/metrics', wizbeat.apiRoute());
+app.get('/wizbeat/dashboard', wizbeat.dashboardRoute());
+app.get('/wizbeat/api', wizbeat.apiRoute());
 
 app.listen(3000, () => {
   console.log('🚀 Server: http://localhost:3000');
@@ -198,126 +198,6 @@ app.listen(3000, () => {
   wizbeat.start();
 });
 ```
-
-### Manual Tracking (Non-Express)
-
-```javascript
-const { trackRequest, startPulse } = require('wizbeat');
-
-// HTTP server or other frameworks
-const http = require('http');
-
-const server = http.createServer((req, res) => {
-  const start = Date.now();
-  
-  // Your request handling
-  res.writeHead(200, { 'Content-Type': 'application/json' });
-  res.end(JSON.stringify({ message: 'Hello World' }));
-  
-  // Track the request
-  const duration = Date.now() - start;
-  trackRequest(req.url, res.statusCode, duration);
-});
-
-// Start monitoring
-startPulse(3000);
-server.listen(3000);
-```
-
-### Getting Data Programmatically
-
-```javascript
-const { trackRequest, startPulse, getMetrics } = require('wizbeat');
-
-// Get current metrics as JSON
-const metrics = getMetrics();
-console.log(metrics);
-
-// Manual tracking example
-trackRequest('GET /api/custom', 200, 150);
-```
-
-### Integration with Popular Frameworks
-
-<details>
-<summary><strong>🔥 Fastify</strong></summary>
-
-```javascript
-const fastify = require('fastify')({ logger: true });
-const { trackRequest, startPulse } = require('wizbeat');
-
-// Add hook to track requests
-fastify.addHook('onResponse', async (request, reply) => {
-  const route = `${request.method} ${request.routerPath || request.url}`;
-  trackRequest(route, reply.statusCode, reply.getResponseTime());
-});
-
-fastify.get('/users', async (request, reply) => {
-  return { users: [] };
-});
-
-const start = async () => {
-  await fastify.listen({ port: 3000 });
-  startPulse();
-};
-start();
-```
-</details>
-
-<details>
-<summary><strong>🌿 Koa</strong></summary>
-
-```javascript
-const Koa = require('koa');
-const { trackRequest, startPulse } = require('wizbeat');
-
-const app = new Koa();
-
-// Middleware to track requests
-app.use(async (ctx, next) => {
-  const start = Date.now();
-  await next();
-  const duration = Date.now() - start;
-  trackRequest(`${ctx.method} ${ctx.path}`, ctx.status, duration);
-});
-
-app.use(async ctx => {
-  ctx.body = { message: 'Hello Koa' };
-});
-
-app.listen(3000);
-startPulse();
-```
-</details>
-
-<details>
-<summary><strong>⚡ Hapi</strong></summary>
-
-```javascript
-const Hapi = require('@hapi/hapi');
-const { trackRequest, startPulse } = require('wizbeat');
-
-const server = Hapi.server({ port: 3000 });
-
-// Event listener for response
-server.events.on('response', (request) => {
-  const route = `${request.method.toUpperCase()} ${request.path}`;
-  trackRequest(route, request.response.statusCode, request.info.responded - request.info.received);
-});
-
-server.route({
-  method: 'GET',
-  path: '/users',
-  handler: () => ({ users: [] })
-});
-
-const start = async () => {
-  await server.start();
-  startPulse();
-};
-start();
-```
-</details>
 
 ## 🌐 Dashboard Integration
 
