@@ -1,6 +1,6 @@
 {
   "name": "wizbeat",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "description": "🔥 A lightweight, real-time API monitoring and health tracking library for Node.js applications with beautiful dashboards",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -15,18 +15,18 @@
     "prepublishOnly": "npm run build"
   },
   "keywords": [
-    "monitoring", 
-    "api", 
-    "health", 
-    "dashboard", 
-    "express", 
-    "middleware", 
-    "typescript", 
-    "nodejs", 
-    "realtime", 
-    "performance", 
-    "metrics", 
-    "pulse", 
+    "monitoring",
+    "api",
+    "health",
+    "dashboard",
+    "express",
+    "middleware",
+    "typescript",
+    "nodejs",
+    "realtime",
+    "performance",
+    "metrics",
+    "pulse",
     "analytics"
   ],
   "author": {
@@ -37,12 +37,13 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/wizforge/wizbeat.git"
+    "url": "git+https://github.com/wizforge/wizbeat.git"
   },
   "bugs": {
     "url": "https://github.com/wizforge/wizbeat/issues"
   },
   "homepage": "https://github.com/wizforge/wizbeat#readme",
+  "readme": "README.md",
   "engines": {
     "node": ">=14.0.0"
   },

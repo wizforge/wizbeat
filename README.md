@@ -1,6 +1,6 @@
 <div align="center">
 
-# WizBeat
+# wizbeat
 
 ### Real-time API Monitoring Made Simple
 
@@ -22,7 +22,7 @@
 
 ---
 
-## 🤔 Why WizBeat?
+## 🤔 Why wizbeat?
 
 Building APIs is easy. **Monitoring them shouldn't be hard.**
 
@@ -131,7 +131,7 @@ app.listen(3000, () => {
 </tr>
 </table>
 
-## 📈 What WizBeat Tracks
+## 📈 What wizbeat Tracks
 
 | Metric | Description | Use Case |
 |--------|-------------|----------|
@@ -432,14 +432,14 @@ wizbeat.start(3000); // Update every 3 seconds
 Returns Express route handler for web dashboard.
 
 ```javascript
-app.get('/dashboard', wizbeat.dashboardRoute());
+app.get('wizbeat/dashboard', wizbeat.dashboardRoute());
 ```
 
 #### `wizbeat.apiRoute()`
 Returns Express route handler for JSON API.
 
 ```javascript
-app.get('/api/metrics', wizbeat.apiRoute());
+app.get('wizbeat/api', wizbeat.apiRoute());
 ```
 
 #### `wizbeat.getMetrics()`
@@ -483,34 +483,6 @@ interface Metric {
   totalErrors: number;
   lastUpdated: string;
 }
-```
-
-## � Advanced Usage
-
-### Custom Alerts & Webhooks
-
-```javascript
-wizbeat.configure({
-  routes: {
-    '/api/critical': {
-      healthThreshold: 95,
-      onHealthBelow: (metric) => {
-        // Send alert when health drops
-        console.log(`🚨 ALERT: ${metric.route} health is ${metric.health}%`);
-        // webhook, email, Slack notification, etc.
-      }
-    }
-  }
-});
-```
-
-### Multiple Dashboard Instances
-
-```javascript
-// Different dashboards for different environments
-app.get('/admin/monitoring', wizbeat.dashboardRoute());
-app.get('/dev/metrics', wizbeat.dashboardRoute());
-app.get('/api/health', wizbeat.apiRoute());
 ```
 
 ## 🤝 Contributing
