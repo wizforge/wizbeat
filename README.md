@@ -610,26 +610,6 @@ npm run example  # Test with example server
 - 💬 **Join discussions** on [GitHub Discussions](https://github.com/your-username/wizbeat/discussions)
 - 📧 **Email support**: your-email@example.com
 
-## 📊 Roadmap
-
-### v1.1.0
-- [ ] Email/Slack alerting system
-- [ ] Data persistence (Redis/MongoDB)
-- [ ] Advanced filtering and search
-- [ ] Performance benchmarking
-
-### v1.2.0
-- [ ] Distributed tracing
-- [ ] Custom metric types
-- [ ] Grafana/Prometheus integration
-- [ ] Rate limiting insights
-
-### v2.0.0
-- [ ] Multi-service monitoring
-- [ ] Machine learning insights
-- [ ] Advanced analytics dashboard
-- [ ] Enterprise features
-
 ## 📋 Changelog
 
 ### v1.0.0 (2025-10-24)
