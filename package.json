@@ -1,6 +1,6 @@
 {
   "name": "wizbeat",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "🔥 A lightweight, real-time API monitoring and health tracking library for Node.js applications with beautiful dashboards",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -11,7 +11,8 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "monitoring", 
@@ -30,13 +31,13 @@
   ],
   "author": {
     "name": "Parth Tyagi",
-    "email": "your-email@example.com",
-    "url": "https://github.com/your-username"
+    "email": "parthtyagi191@gmail.com",
+    "url": "https://github.com/Parthh191"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/wizforge/wizbeat"
+    "url": "https://github.com/wizforge/wizbeat.git"
   },
   "bugs": {
     "url": "https://github.com/wizforge/wizbeat/issues"

@@ -7,7 +7,6 @@
 *A lightweight, powerful monitoring library for Node.js applications with beautiful dashboards*
 
 [![NPM Version](https://img.shields.io/npm/v/wizbeat.svg)](https://www.npmjs.com/package/wizbeat)
-[![License](https://img.shields.io/npm/l/wizbeat.svg)](https://github.com/your-username/wizbeat/blob/main/LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
 [![Express](https://img.shields.io/badge/Express-Compatible-green.svg)](https://expressjs.com/)
 
@@ -579,7 +578,7 @@ wizbeat.configure({
 We welcome contributions! Here's how you can help:
 
 ### 🐛 Found a Bug?
-1. Check [existing issues](https://github.com/your-username/wizbeat/issues)
+1. Check [existing issues](https://github.com/wizforge/wizbeat/issues)
 2. Create a new issue with reproduction steps
 3. Include your Node.js and Express versions
 
@@ -630,25 +629,6 @@ npm run example  # Test with example server
 - [ ] Machine learning insights
 - [ ] Advanced analytics dashboard
 - [ ] Enterprise features
-
-## 🏆 Showcase
-
-**Using WizBeat in production?** We'd love to feature your use case!
-
-<table>
-<tr>
-<td align="center">
-<img src="https://via.placeholder.com/100x100?text=Your+Logo" width="100"><br>
-<b>Your Company</b><br>
-<sub>Monitoring 1M+ requests/day</sub>
-</td>
-<td align="center">
-<img src="https://via.placeholder.com/100x100?text=Add+Yours" width="100"><br>
-<b>Add Your Project</b><br>
-<sub>Open a PR to be featured!</sub>
-</td>
-</tr>
-</table>
 
 ## 📋 Changelog
 
