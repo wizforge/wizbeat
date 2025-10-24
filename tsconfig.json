@@ -8,7 +8,9 @@
     "strict": true,              // enable strict type checking
     "esModuleInterop": true,     // allow default imports from CJS modules
     "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "removeComments": false,     // Keep copyright headers in compiled JS
+    "preserveConstEnums": true   // Preserve const enums for better performance
   },
   "include": ["src/**/*"]
 }

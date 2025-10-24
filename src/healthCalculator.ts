@@ -1,3 +1,11 @@
+/**
+ * WizBeat - Real-time API Monitoring Library
+ * Copyright (c) 2025 Parth Tyagi
+ * Licensed under MIT License
+ * 
+ * Health calculation module - Calculates API health metrics and scores
+ */
+
 import { RouteMetrics } from "./types";
 
 export function calculateMetrics(route: string, data: RouteMetrics) {

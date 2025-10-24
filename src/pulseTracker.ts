@@ -1,3 +1,11 @@
+/**
+ * WizBeat - Real-time API Monitoring Library
+ * Copyright (c) 2025 Parth Tyagi
+ * Licensed under MIT License
+ * 
+ * Pulse tracking module - Tracks API requests and response metrics
+ */
+
 import { RouteMetrics } from "./types";
 
 export const metrics = new Map<string, RouteMetrics>();

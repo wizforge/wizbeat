@@ -1,0 +1,17 @@
+# Exclude development files
+node_modules/
+*.log
+*.tgz
+
+# Exclude source files (only ship dist)
+src/
+tsconfig.json
+
+# Exclude development/testing files
+example.js
+PUBLISH.md
+.vscode/
+.DS_Store
+
+# Keep examples folder for users
+!examples/

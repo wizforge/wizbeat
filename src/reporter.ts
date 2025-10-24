@@ -1,3 +1,11 @@
+/**
+ * WizBeat - Real-time API Monitoring Library
+ * Copyright (c) 2025 Parth Tyagi
+ * Licensed under MIT License
+ * 
+ * Console reporter module - Displays live metrics in terminal
+ */
+
 import { metrics } from "./pulseTracker";
 import { calculateMetrics } from "./healthCalculator";
 
