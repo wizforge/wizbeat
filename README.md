@@ -123,8 +123,6 @@ app.listen(3000, () => {
 
 ### 🌐 **Frontend Integration**
 - JSON API endpoint
-- React components
-- Vanilla JS widgets
 - Custom dashboard support
 
 </td>
