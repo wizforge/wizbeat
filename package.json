@@ -1,0 +1,18 @@
+{
+  "name": "wizbeat",
+  "version": "0.1.0",
+  "description": "A lightweight heartbeat and health monitoring library for Node.js APIs",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc --watch"
+  },
+  "keywords": ["monitoring", "pulse", "health", "api", "typescript", "nodejs"],
+  "author": "Parth Tyagi",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.1.6"
+  }
+}

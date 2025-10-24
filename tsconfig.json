@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",          // JS version to compile
+    "module": "CommonJS",        // Node.js module system
+    "declaration": true,         // generate .d.ts for TS users
+    "outDir": "dist",            // compiled JS goes here
+    "rootDir": "src",            // source code folder
+    "strict": true,              // enable strict type checking
+    "esModuleInterop": true,     // allow default imports from CJS modules
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*"]
+}
