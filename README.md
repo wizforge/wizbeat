@@ -1,6 +1,6 @@
 <div align="center">
 
-# 💓 WizBeat
+# WizBeat
 
 ### Real-time API Monitoring Made Simple
 
@@ -10,7 +10,9 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
 [![Express](https://img.shields.io/badge/Express-Compatible-green.svg)](https://expressjs.com/)
 
-[🚀 Quick Start](#-quick-start) • 
+### 🚀 Quick 🛠️ Advanced Usage
+
+### Multiple Dashboard Instances • 
 [📊 Features](#-features) • 
 [🌐 Dashboard](#-dashboard-integration) • 
 [📖 Examples](#-examples) • 
@@ -176,28 +178,13 @@ app.listen(3000, () => {
 });
 ```
 
-### TypeScript with Configuration
+### TypeScript Integration
 
 ```typescript
 import express from 'express';
 import wizbeat from 'wizbeat';
 
 const app = express();
-
-// Configure WizBeat
-wizbeat.configure({
-  interval: 5000,
-  routes: {
-    '/api/users': { 
-      healthThreshold: 90,
-      maxResponseTime: 200 
-    },
-    '/api/orders': {
-      healthThreshold: 95,
-      maxResponseTime: 150
-    }
-  }
-});
 
 app.use(wizbeat.middleware());
 
@@ -237,25 +224,17 @@ startPulse(3000);
 server.listen(3000);
 ```
 
-### Custom Health Thresholds
+### Getting Data Programmatically
 
 ```javascript
-wizbeat.configure({
-  routes: {
-    '/api/auth': { 
-      healthThreshold: 99,    // Critical endpoint
-      maxResponseTime: 100    // Must be very fast
-    },
-    '/api/upload': { 
-      healthThreshold: 70,    // Can be slower
-      maxResponseTime: 5000   // File uploads take time
-    },
-    '/api/search': {
-      healthThreshold: 85,
-      maxResponseTime: 300
-    }
-  }
-});
+const { trackRequest, startPulse, getMetrics } = require('wizbeat');
+
+// Get current metrics as JSON
+const metrics = getMetrics();
+console.log(metrics);
+
+// Manual tracking example
+trackRequest('GET /api/custom', 200, 150);
 ```
 
 ### Integration with Popular Frameworks
@@ -449,21 +428,6 @@ Starts console monitoring with optional refresh interval (default: 5000ms).
 wizbeat.start(3000); // Update every 3 seconds
 ```
 
-#### `wizbeat.configure(config: WizBeatConfig)`
-Configure WizBeat settings.
-
-```typescript
-wizbeat.configure({
-  interval: 5000,
-  routes: {
-    '/api/users': { 
-      healthThreshold: 90,
-      maxResponseTime: 200 
-    }
-  }
-});
-```
-
 #### `wizbeat.dashboardRoute()`
 Returns Express route handler for web dashboard.
 
@@ -509,18 +473,6 @@ startPulse(5000);
 ### TypeScript Interfaces
 
 ```typescript
-interface WizBeatConfig {
-  autoStart?: boolean;
-  interval?: number;
-  routes?: { [route: string]: RouteConfig };
-}
-
-interface RouteConfig {
-  healthThreshold?: number;
-  maxResponseTime?: number;
-  alertEmail?: string;
-}
-
 interface Metric {
   route: string;
   pulseRate: number;
@@ -559,18 +511,6 @@ wizbeat.configure({
 app.get('/admin/monitoring', wizbeat.dashboardRoute());
 app.get('/dev/metrics', wizbeat.dashboardRoute());
 app.get('/api/health', wizbeat.apiRoute());
-```
-
-### Performance Optimization
-
-```javascript
-// For high-traffic applications
-wizbeat.configure({
-  interval: 10000,        // Less frequent updates
-  sampleRate: 0.1,        // Track 10% of requests
-  maxRoutes: 50,          // Limit tracked routes
-  dataRetention: 300000   // Keep 5 minutes of data
-});
 ```
 
 ## 🤝 Contributing

@@ -13,14 +13,4 @@ export interface RouteMetrics {
   last30s: number[];
 }
 
-export interface RouteConfig {
-  healthThreshold?: number;
-  maxResponseTime?: number;
-  alertEmail?: string;
-}
 
-export interface WizBeatConfig {
-  autoStart?: boolean;
-  interval?: number;
-  routes?: { [route: string]: RouteConfig };
-}

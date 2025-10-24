@@ -8,7 +8,7 @@
  */
 
 const express = require('express');
-const wizbeat = require('./dist/index.js').default;
+const wizbeat = require('./dist/wizbeat.js'); // Direct import - most reliable
 
 const app = express();
 

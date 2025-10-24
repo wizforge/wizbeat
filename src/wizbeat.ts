@@ -10,23 +10,14 @@
  * @license MIT
  */
 
-import { WizBeatConfig } from './types';
 import { startPulse } from './reporter';
 import { middleware } from './middleware';
 import { metrics } from './pulseTracker';
 import { calculateMetrics } from './healthCalculator';
 
 class WizBeat {
-  private config: WizBeatConfig = {
-    autoStart: true,
-    interval: 5000,
-    routes: {}
-  };
-
-  constructor(config?: Partial<WizBeatConfig>) {
-    if (config) {
-      this.config = { ...this.config, ...config };
-    }
+  constructor() {
+    // Constructor no longer takes configuration
   }
 
   // Express middleware
@@ -35,15 +26,8 @@ class WizBeat {
   }
 
   // Start monitoring
-  start(interval?: number) {
-    const monitorInterval = interval || this.config.interval;
-    return startPulse(monitorInterval);
-  }
-
-  // Configure WizBeat
-  configure(config: Partial<WizBeatConfig>) {
-    this.config = { ...this.config, ...config };
-    return this;
+  start(interval: number = 5000) {
+    return startPulse(interval);
   }
 
   // Get current metrics as JSON for frontend
@@ -95,76 +79,114 @@ class WizBeat {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💓 WizBeat Dashboard</title>
+    <title>⚡ WizBeat Dashboard</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
             min-height: 100vh;
             padding: 20px;
+            color: #e2e8f0;
         }
         .container { max-width: 1200px; margin: 0 auto; }
         .header { 
             text-align: center; 
-            color: white; 
+            color: #64ffda; 
             margin-bottom: 30px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 0 2px 8px rgba(100, 255, 218, 0.3);
         }
-        .header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        .header h1 { 
+            font-size: 2.5em; 
+            margin-bottom: 10px; 
+            background: linear-gradient(45deg, #64ffda, #00bcd4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .header p { color: #94a3b8; font-size: 1.1em; }
         .metrics-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
             gap: 20px; 
         }
         .metric-card { 
-            background: rgba(255,255,255,0.95);
-            border-radius: 15px;
+            background: linear-gradient(145deg, #1e293b, #334155);
+            border-radius: 16px;
             padding: 25px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 
+                        0 1px 3px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .metric-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5),
+                        0 0 20px rgba(100, 255, 218, 0.1);
         }
         .route-name { 
             font-size: 1.2em; 
-            font-weight: bold; 
+            font-weight: 600; 
             margin-bottom: 15px;
-            color: #333;
-            border-bottom: 2px solid #f0f0f0;
+            color: #64ffda;
+            border-bottom: 2px solid rgba(100, 255, 218, 0.2);
             padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .stat { text-align: center; }
+        .stat { 
+            text-align: center; 
+            padding: 12px;
+            background: rgba(15, 23, 42, 0.4);
+            border-radius: 8px;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
         .stat-value { 
             font-size: 1.8em; 
-            font-weight: bold; 
+            font-weight: 700; 
             margin-bottom: 5px;
         }
         .stat-label { 
-            font-size: 0.9em; 
-            color: #666; 
+            font-size: 0.85em; 
+            color: #94a3b8; 
             text-transform: uppercase;
             letter-spacing: 1px;
+            font-weight: 500;
         }
-        .health-good { color: #27ae60; }
-        .health-warning { color: #f39c12; }
-        .health-danger { color: #e74c3c; }
-        .pulse { color: #3498db; }
-        .response-time { color: #9b59b6; }
-        .error-rate { color: #e67e22; }
+        .health-good { color: #10b981; text-shadow: 0 0 8px rgba(16, 185, 129, 0.3); }
+        .health-warning { color: #f59e0b; text-shadow: 0 0 8px rgba(245, 158, 11, 0.3); }
+        .health-danger { color: #ef4444; text-shadow: 0 0 8px rgba(239, 68, 68, 0.3); }
+        .pulse { color: #3b82f6; text-shadow: 0 0 8px rgba(59, 130, 246, 0.3); }
+        .response-time { color: #8b5cf6; text-shadow: 0 0 8px rgba(139, 92, 246, 0.3); }
+        .error-rate { color: #f97316; text-shadow: 0 0 8px rgba(249, 115, 22, 0.3); }
         .refresh-info { 
             text-align: center; 
-            color: rgba(255,255,255,0.8); 
-            margin-top: 20px;
+            color: #64748b; 
+            margin-top: 30px;
             font-size: 0.9em;
+            background: rgba(30, 41, 59, 0.6);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+        .no-data {
+            text-align: center;
+            color: #64748b;
+            font-size: 1.1em;
+        }
+        .no-data h3 {
+            color: #64ffda;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>💓 WizBeat Dashboard</h1>
-            <p>Real-time API Monitoring</p>
+            <h1>⚡ WizBeat Dashboard</h1>
+            <p>Real-time API Performance Monitoring</p>
         </div>
         <div id="metrics" class="metrics-grid">
             <!-- Metrics will be loaded here -->
@@ -183,7 +205,7 @@ class WizBeat {
                     const lastUpdated = document.getElementById('lastUpdated');
                     
                     if (data.metrics.length === 0) {
-                        container.innerHTML = '<div class="metric-card"><h3>No metrics yet</h3><p>Start making requests to see data!</p></div>';
+                        container.innerHTML = '<div class="metric-card no-data"><h3>No metrics available</h3><p>Start making API requests to see monitoring data!</p></div>';
                         return;
                     }
                     
@@ -193,7 +215,7 @@ class WizBeat {
                         
                         return \`
                             <div class="metric-card">
-                                <div class="route-name">📍 \${metric.route}</div>
+                                <div class="route-name">🌐 \${metric.route}</div>
                                 <div class="stats">
                                     <div class="stat">
                                         <div class="stat-value pulse">\${metric.pulseRate}</div>
@@ -238,5 +260,11 @@ class WizBeat {
 // Create singleton instance
 const wizbeat = new WizBeat();
 
+// Export both named and default
 export default wizbeat;
 export { WizBeat };
+
+// For CommonJS compatibility
+module.exports = wizbeat;
+module.exports.default = wizbeat;
+module.exports.WizBeat = WizBeat;

@@ -1,6 +1,6 @@
 {
   "name": "wizbeat",
-  "version": "1.0.3",
+  "version": "1.0.6",
   "description": "🔥 A lightweight, real-time API monitoring and health tracking library for Node.js applications with beautiful dashboards",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
